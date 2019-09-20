@@ -4,16 +4,19 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import com.google.common.collect.ImmutableCollection;
+import com.recall.retry.RetriableCallState;
 
 public interface RetryStrategy {
+
+    public static final long EXHAUSTED = -1l;
 
     /**
      * Returns the length of time to wait, in milliseconds, based on the retry attempt.
      * 
-     * @param retryAttempt the current retry attempt number.
+     * @param callState the current retriable call state.
      * @return the length of time to wait, in milliseconds.
      */
-    long getWaitTime(int retryAttempt);
+    long getWaitTime(@Nonnull final RetriableCallState<?> callState);
 
     /**
      * Returns the maximum number of retry attempts to make.

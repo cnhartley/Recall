@@ -56,7 +56,7 @@ public abstract class RetriableCallable<V> implements Callable<V> {
     @Override
     public abstract V call() throws ExhuastedRetriesException, NonRetriableException;
 
-    protected V makeCall(@Nonnull final Callable<V> caller) {
+    protected V makeCall(@Nonnull final Callable<V> caller) throws ExhuastedRetriesException, NonRetriableException {
         final RetriableCallState<V> callState = new RetriableCallState<>(caller);
         return makeCall(callState);
     }
@@ -97,7 +97,7 @@ public abstract class RetriableCallable<V> implements Callable<V> {
     }
 
     private void pause(@Nonnull final RetriableCallState<?> callState) {
-        long waitTime = getRetryStrategy().getWaitTime(callState.getRetryCount());
+        long waitTime = getRetryStrategy().getWaitTime(callState);
         try {
             if (waitTime > 0) {
                 Thread.sleep(waitTime);

@@ -1,5 +1,6 @@
 package com.recall.retry;
 
+import java.time.Instant;
 import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ConcurrentLinkedQueue;
@@ -41,6 +42,9 @@ public class RetriableCallState<V> {
     @Nonnull
     @Getter
     private final Callable<V> callable;
+
+    @Getter
+    private final Instant startTime = Instant.now();
 
     /**
      * Returns the current number of retries this call state has attempted.
