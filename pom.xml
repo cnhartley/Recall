@@ -17,7 +17,7 @@
         <lombok.version>1.16.22</lombok.version>
 
         <!-- Testing dependencies versions -->
-        <junit.version>4.12</junit.version>
+        <junit.version>4.13.1</junit.version>
         <mockito.version>2.7.22</mockito.version>
     </properties>
 
